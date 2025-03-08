@@ -1,0 +1,12 @@
+body {
+  a:link {
+    color: green;
+  }
+    background: black;
+}
+p {
+  color: forestgreen;
+}
+h1 {
+  font-weight: bold;
+}
