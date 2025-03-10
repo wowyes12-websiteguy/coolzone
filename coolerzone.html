@@ -1,10 +1,66 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <link rel="stylesheet" href="style.css">
-  </head>
-  <body>
-    <p> cooler zone</p>
-  </body>
-</html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Random Cat Image Viewer</title>
+  <style>
+    body {
+      background-color: #f5f5f5;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      margin-top: 20px;
+    }
+    #cat-container {
+      margin-top: 30px;
+    }
+    #cat-image {
+      max-width: 80%;
+      height: auto;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Random Cat Image Viewer</h1>
+  <div id="cat-container">
+    <img id="cat-image" src="" alt="A cute cat image">
+  </div>
+  <button id="new-cat">Show Another Cat</button>
 
+  <script>
+    // Replace with your actual API key from The Cat API
+    const apiKey = 'live_w1FIofAONESWMqazodgjuXxhcSCJ493zhEnWsULzvemkxc7JMw5xHyoYfhDuR0Bf';
+    const apiUrl = 'https://api.thecatapi.com/v1/images/search';
+
+    async function loadCatImage() {
+      try {
+        const response = await fetch(apiUrl, {
+          headers: { 'x-api-key': apiKey }
+        });
+        const data = await response.json();
+        if (data.length > 0) {
+          document.getElementById('cat-image').src = data[0].url;
+        }
+      } catch (error) {
+        console.error('Error fetching cat image:', error);
+      }
+    }
+
+    document.getElementById('new-cat').addEventListener('click', loadCatImage);
+
+    // Load a cat image as soon as the page loads
+    window.onload = loadCatImage;
+  </script>
+</body>
+</html>
